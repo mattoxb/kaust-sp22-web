@@ -1,0 +1,112 @@
+course-introduction:
+  slug: course-introduction
+  date: 2022-01-20
+  title: Course Introduction
+  topics:
+    - Course Introduction
+    - Using Jupyter Notebooks
+    - Simple Python Programs
+
+data-structures:
+  slug: data-structures
+  date: 2022-01-24
+  title: Week 2 - Data Structures
+  topics:
+    - Lists, Sets, Hashmaps in Python
+    - Functions
+
+classes-and-objects:
+  slug: classes-and-objects
+  date: 2022-01-31
+  title: Week 3 - Classes and Objects
+  topics:
+    - Classes and Objects in Python
+  
+interactive-text:
+  slug: interactive-text
+  date: 2022-02-07
+  title: Week 4 - Interactive Text Programs
+  topics:
+    - Getting input and output from the user
+    - Pattern matching and intelligent interaction
+  
+web-programming:
+  slug: web-programming
+  date: 2022-02-14
+  title: Week 5 - Web Programming
+  topics:
+    - Using Flask to build interactive web pages
+  
+databases:
+  slug: databases
+  date: 2022-02-21
+  title: Week 6,7 - Databases
+  topics:
+    - CSV and other file formats
+    - Basic SQL
+    - Tables and Queries
+    - Connecting to databases with Python
+    - Building data-driven programs
+
+visualization:
+  slug: visualization
+  date: 2022-03-07
+  title: Week 8 - Data Visualization
+  topics:
+    - Seaborn and visualizations
+    - Data Frames
+    - Telling a story with data
+  
+competitive-programming:
+  slug: x
+  date: 2022-03-21
+  title: Week 9 - Competitive Programming
+  topics: []
+
+algorithms-1:
+  slug: x
+  date: 2022-03-28
+  title: Week 10 - Algorithms 1
+  topics:
+    - Divide and Conquer
+    - Greedy Algorithms
+
+algorithms-2:
+  slug: x
+  date: 2022-04-04
+  title: Week 11 - Algorithms 2
+  topics:
+    - Binary Search
+    - Dynamic Programming
+
+c++:
+  slug: x
+  date: 2022-04-11
+  title: Week 12 - Programming Language C++
+  topics:
+    - Strongly-typed Languages
+    - Comparisons with Python
+
+matlab:
+  slug: x
+  date: 2022-04-18
+  title: Week 13 - Programming Lanugage Matlab
+  topics:
+    - Using Matlab for scientific computation
+
+excel-1:
+  slug: x
+  date: 2022-04-25
+  title: Week 14 - Basic Excel
+  topics:
+    - Summary and Lookup Functions
+
+excell-2:
+  slug: x
+  date: 2022-05-02
+  title: Week 15 - Advanced Excel
+  topics:
+    - Conditional Formatting
+    - Data Validation
+    - Pivot Tables
+
