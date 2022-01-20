@@ -13,9 +13,3 @@ main:
   - name: Lectures
     url: lectures/
     weight: 30
-  - name: Readings
-    url: readings/
-    weight: 40
-  - name: Problems
-    url: problems/
-    weight: 40
