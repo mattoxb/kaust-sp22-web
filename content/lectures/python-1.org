@@ -1,0 +1,30 @@
+---
+date: 2021-05-17
+draft: false
+title: Python 1
+linktitle: Python 1
+weight: 1
+type: book
+links:
+  - category: Slides
+    links:
+      - title: Introduction to Python (Fast Mode!)
+        url: /slides/python-1.html
+        display: true
+---
+
+
+- The students in this class have different backgrounds, so we will start from the beginning.
+
+Objectives:
+- Python's types
+  - Numerics
+  - Strings
+  - Booleans
+  - Lists
+  - Dictionaries
+- Statements and Such
+  - If/Else
+  - Functions definitions
+
+{{< links >}}

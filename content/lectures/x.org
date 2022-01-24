@@ -8,7 +8,6 @@ type: book
 links:  []
 ---
 
-
-This is just a placeholder for now.
+This is just a placeholder for now.  We'll put up a real page for this lecture on the week that we give it.
 
 {{< links >}}

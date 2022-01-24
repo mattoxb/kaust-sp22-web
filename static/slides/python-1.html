@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Python Data Structures</title>
+<meta name="author" content="Mattox Beckman"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../dist/reveal.css"/>
+
+<link rel="stylesheet" href="../dist/theme/beige.css" id="theme"/>
+
+<link rel="stylesheet" href="custom.css"/>
+<link rel="stylesheet" href="../plugin/highlight/zenburn.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Python Data Structures</h1><h2 class="author">Mattox Beckman</h2>
+</section>
+
+<section>
+<section id="slide-orgfbe433d">
+<h2 id="orgfbe433d">Numerics Types</h2>
+<p>
+We should start from the beginning.  This won&rsquo;t take very long though.
+</p>
+
+<p>
+Python has different <b>data types</b>.
+</p>
+
+<dl>
+<dt>Integers</dt><dd>Basically, whole numbers.  They can get as big as you like.</dd>
+<dt>Floating Point</dt><dd><p>
+Floating point numbers.
+</p>
+<ul>
+<li>The computer only keeps enough memory to store maybe 10 digits, after that it</li>
+
+</ul>
+<p>
+truncates the value.
+</p>
+<ul>
+<li>The decimal point is &ldquo;floating&rdquo; in that the number can be something like <code>12345.67</code> or <code>0.000001234567</code></li>
+
+</ul></dd>
+
+</dl>
+
+</section>
+</section>
+<section>
+<section id="slide-org0d770f2">
+<h2 id="org0d770f2">Strings and Booleans</h2>
+<ul>
+<li>Short for &ldquo;string of characters&rdquo;.</li>
+<li>You can just think of it as text.</li>
+<li>Strings must be surrounded by either single quotes or double quotes.</li>
+<li>Use <code>+</code> to append to strings together (called <b>concatenating</b>).
+<ul>
+<li><code>"H " + "9123" == "H 9123"</code></li>
+<li>Use <code>str</code> to convert something into a string.
+<ul>
+<li><code>str(123) = "123"</code></li>
+
+</ul></li>
+<li>Use <code>int</code> to convert a string into an integer.
+<ul>
+<li><code>int("123") = 123</code></li>
+<li>So&#x2026; <code>"123"+"300"=="123300"</code> but <code>int("123") + int("300") == 423</code></li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org471beaf">
+<h2 id="org471beaf">Booleans</h2>
+<ul>
+<li><p>
+The actual booleans are <code>True</code> and <code>False</code>.
+</p>
+<div class="org-src-container">
+
+<pre><code class="python" >if True:
+    print("hi")
+else:
+    print("there")
+</code></pre>
+</div></li>
+
+</ul>
+
+<pre class="example" id="org3837540">
+hi
+</pre>
+
+<ul>
+<li><p>
+Almost all other values are considered &ldquo;true&rdquo;, except for special value <code>None</code>.
+</p>
+<div class="org-src-container">
+
+<pre><code class="python" >if 52:
+    print("hi")
+else:
+    print("there")
+</code></pre>
+</div></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org4f8d868">
+<h2 id="org4f8d868">Variables</h2>
+<p>
+Variable names begin with a lower case letter.  After that there can be as many letters (upper and lower case), numbers, and
+certain special characters like <code>_</code>, <code>'</code>, etc.  Each variable can keep track of one value.
+</p>
+
+<ul>
+<li>Assign to a variable by using a single equal: <code>x = 23</code></li>
+<li>Compare two variables by using a double equal: <code>x == y</code>
+<ul>
+<li>Common mistake in languages is to put <code>=</code> instead of <code>==</code>.</li>
+<li>Does Python check?</li>
+
+</ul></li>
+<li>We will talk about &ldquo;scoping&rdquo; in a few minutes.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfd22fe4">
+<h2 id="orgfd22fe4">Lists</h2>
+<ul>
+<li>Place values between square brackets, like <code>[1,2,3]</code>.  You can put <b>anything</b> in a list, including other lists,
+and even functions.</li>
+<li>You can access a specific element of a list or a string, where zero is the first element.</li>
+<li>Note that double equals means &ldquo;is equal to&rdquo;, whereas a single equal means to assign something.  Recall the <a href="#/slide-org4f8d868" class="backwardlink">Variables</a> section.</li>
+<li>Accessing a single element:
+<ul>
+<li><code>"Hello"[0] == "H"</code></li>
+<li><code>[2,4,6,7][3] == 7</code></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org0fe3be7">
+<h2 id="org0fe3be7">List Slices</h2>
+<ul>
+<li>Accessing a &ldquo;slice&rdquo;, e.g. <code>[a:b]</code>.  It will give you the elements from <code>a</code> upto but not including <code>b</code>.
+<ul>
+<li><code>"Hello"[1:2] == "H"</code></li>
+<li><code>"Hello"[1:4] == "Hel"</code>  I guess you need to be careful with this example.</li>
+
+</ul></li>
+<li>Accessing elements from the end, use negative numbers.
+<ul>
+<li><code>"Hello"[-1] == "o"</code></li>
+
+</ul></li>
+<li>It works with slices too.
+<ul>
+<li><code>"Hello"[3:-1] == "lo"</code></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc945dfe">
+<h2 id="orgc945dfe">Dictionaries</h2>
+<ul>
+<li>Keeps a set of keys and corresponding values (like a word and its definition.)</li>
+<li>Use curly braces to create them: <code>phones = { "Jenni":8675390, "Emergency": 911 }</code></li>
+<li>Use lookup syntax like this:
+<ul>
+<li><code>phones['Jenni'] == 8675309</code></li>
+
+</ul></li>
+<li>There are some special functions:
+<ul>
+<li><code>phones.keys() == ['Jenni','Emergency']</code></li>
+<li><code>phones.values() == [8675309,911]</code></li>
+<li>Note that the order of the keys and values could be anything.</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org4f37232">
+<h2 id="org4f37232">Looping</h2>
+<p>
+You can use a <code>for</code> loop to have a variable have many different values.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="python" >for x in ["Hello","There","Peeps"]:
+    print(x)
+</code></pre>
+</div>
+
+<pre class="example" id="org96dfb76">
+Hello
+There
+Peeps
+</pre>
+
+<p>
+Note that <b>indentation counts!</b>  If you don&rsquo;t indent, it will consider it to be not part of the loop.
+</p>
+
+<ul>
+<li>You can use <code>range(0,10)</code>, e.g., to get all the numbers from 0 to 9.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org79233b2">
+<h2 id="org79233b2">If Statements</h2>
+<p>
+You can have a &ldquo;condition&rdquo; and a &ldquo;then branch&rdquo; (what to do if the condition is true):
+</p>
+<div class="org-src-container">
+
+<pre><code class="python" >x = 10
+y = 20
+if x &gt; y:
+    print("Hello")
+if x &lt; y:
+    print("There")
+print("Done")
+</code></pre>
+</div>
+
+<pre class="example" id="orgc2496f3">
+There
+Done
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org159cb87">
+<h2 id="org159cb87">If/Else Statements</h2>
+<p>
+You can also have an &ldquo;else branch&rdquo; to say what to happen if the condition is false.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="python" >if x &gt; y:
+    print("Greater")
+else:
+    print("Not greater")
+</code></pre>
+</div>
+
+<pre class="example" id="orgb69405a">
+Not greater
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org420af4f">
+<h2 id="org420af4f">Chains of If Statements</h2>
+<p>
+You can chain if statements together useing <code>elif</code> (short for &ldquo;else if&rdquo;):
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="python" >if x&gt;y:
+    print("Greater")
+elif x==y:
+    print("Equal")
+else:
+    print("Less than")
+</code></pre>
+</div>
+
+<pre class="example" id="org4f0ea26">
+Less than
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org870eb00">
+<h2 id="org870eb00">Functions</h2>
+<p>
+You can declare a function by using the keyword <code>def</code>.  You supply a function name, a list of parameters, and a function body.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="pyton" >def taxedPlus(a,b):
+   return a + b - 2
+</code></pre>
+</div>
+
+<pre class="example" id="orga4b5a62">
+&gt; taxedPlus(10,20)
+28
+</pre>
+
+<ul>
+<li><code>taxedPlus</code> is the name of the function.</li>
+<li><code>a</code> and <code>b</code> are the parameters.</li>
+<li>We can run the function by <b>calling</b> it:</li>
+<li>here 10 and 20 are the <b>arguments</b> to the function, and 28 is the output.</li>
+
+</ul>
+
+<p>
+If you do not have a <code>return</code> statement, the function will not produce an output.  (<code>print</code> does something like this.)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org3cb099e">
+<h2 id="org3cb099e">Variables in Functions</h2>
+<ul>
+<li>It&rsquo;s possible to have multiple variables with the same name.</li>
+<li>If you assign to a variable in the function, it creates a brand new variable with that name.
+<ul>
+<li>This is called a <b>local variable</b></li>
+
+</ul></li>
+<li>If you use a variable in a function, but <i>don&rsquo;t</i> assign to it, it uses a top-level variable of that name.
+<ul>
+<li>This is called a <b>global variable</b>.</li>
+
+</ul></li>
+<li>You can use the <code>nonlocal</code> keyword if you want to assign to a global variable.  This is bad style though.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre><code class="python" >a = 10
+b = 20
+c = 30
+
+def foo(x):
+    nonlocal c
+    b = 5
+    y = a + b
+    c = c + y
+    return x + c
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orga2dfa4a">
+<h2 id="orga2dfa4a">Variables in Functions, 2</h2>
+<div class="org-src-container">
+
+<pre><code class="python" >a = 10
+b = 20
+c = 30
+
+def foo(x):
+    nonlocal c
+    b = 5
+    y = a + b
+    c = c + y
+    return x + c
+</code></pre>
+</div>
+<ul>
+<li><code>a</code> is global</li>
+<li>there are two variables <code>b</code>, one local, one global</li>
+<li>there is one variable <code>c</code>.</li>
+
+</ul>
+
+<p>
+If you run <code>foo(10)</code>, then you will have:
+</p>
+<ul>
+<li><code>a == 10</code></li>
+<li><code>b == 20</code> (not 5!)</li>
+<li><code>c == 30 + 10 + 5 == 45</code></li>
+<li>The return value of the function will be <code>55</code>.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../dist/reveal.js"></script>
+<script src="../plugin/highlight/highlight.js"></script>
+<script src="../plugin/notes/notes.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'none',
+transitionSpeed: 'default',
+hash:true, respond_to_hash_changes:true, max_scale:2.0, width:1200, height:900, center:false,
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealHighlight, RevealNotes ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

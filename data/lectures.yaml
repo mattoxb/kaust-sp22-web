@@ -8,7 +8,7 @@ course-introduction:
     - Simple Python Programs
 
 data-structures:
-  slug: data-structures
+  slug: python-1
   date: 2022-01-24
   title: Week 2 - Data Structures
   topics:
@@ -16,14 +16,14 @@ data-structures:
     - Functions
 
 classes-and-objects:
-  slug: classes-and-objects
+  slug: x
   date: 2022-01-31
   title: Week 3 - Classes and Objects
   topics:
     - Classes and Objects in Python
   
 interactive-text:
-  slug: interactive-text
+  slug: x
   date: 2022-02-07
   title: Week 4 - Interactive Text Programs
   topics:
@@ -31,14 +31,14 @@ interactive-text:
     - Pattern matching and intelligent interaction
   
 web-programming:
-  slug: web-programming
+  slug: x
   date: 2022-02-14
   title: Week 5 - Web Programming
   topics:
     - Using Flask to build interactive web pages
   
 databases:
-  slug: databases
+  slug: x
   date: 2022-02-21
   title: Week 6,7 - Databases
   topics:
@@ -49,7 +49,7 @@ databases:
     - Building data-driven programs
 
 visualization:
-  slug: visualization
+  slug: x
   date: 2022-03-07
   title: Week 8 - Data Visualization
   topics:

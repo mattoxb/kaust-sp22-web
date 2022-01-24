@@ -2,7 +2,7 @@
 widget: blank
 headless: true
 weight: 10
-title: CS 421 &mdash; Programming Languages
+title: KAUST &mdash; Introduction to Computer Programming
 #hero_media: book.svg
 design:
   background:
@@ -11,8 +11,10 @@ design:
     text_color_light: true
 ---
 
-Understanding languages deeply gives you more power as a programmer!
- - Learn functional programming and leverage it in your projects.
- - Be able to pick the right language for the job at hand.
- - Use mathematical reasoning to document and discover language features.
+This is a topics course to introduce you to programming in Python and using libraries to do interesting things.
+You will learn thing like:
+- Building a web site
+- Connecting to a database
+- Visualization
+- C++, Matlab, and Excell
 
