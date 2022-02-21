@@ -17,6 +17,9 @@ links:
       - title: Early Feedback
         display: true
         url: https://forms.gle/vAXY5ri92gUJ6cch6
+      - title: C++ Code for Event Planning problem
+        display: true
+        url: https://onlinegdb.com/pLEu9ssaK
 ---
 
 This week we wrote a game called Hunt the Wumpus in Python.
