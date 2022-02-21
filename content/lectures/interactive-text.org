@@ -14,6 +14,9 @@ links:
       - title: Repl.It session
         url: https://replit.com/@mattox/Wumpus-Python#main.py
         display: true
+      - title: Early Feedback
+        display: true
+        url: https://forms.gle/vAXY5ri92gUJ6cch6
 ---
 
 This week we wrote a game called Hunt the Wumpus in Python.
