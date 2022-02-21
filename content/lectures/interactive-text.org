@@ -1,0 +1,23 @@
+---
+date: 2021-05-17
+draft: false
+title: Interactive Text Games
+linktitle: Interactive
+weight: 1
+type: book
+links:
+  - category: Writeups
+    links:
+      - title: Hunt the Wumpus in Python
+        url: /writeups/wumpus-python.html
+        display: true
+      - title: Repl.It session
+        url: https://replit.com/@mattox/Wumpus-Python#main.py
+        display: true
+---
+
+This week we wrote a game called Hunt the Wumpus in Python.
+A writeup and live code session of the results are in the links.
+
+
+{{< links >}}
