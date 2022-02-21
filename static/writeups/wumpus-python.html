@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-20 Sun 22:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hunt the Wumpus in Python</title>
+<meta name="author" content="Mattox Beckman" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" href="css/tufte.css" type="text/css" />
+<script type="text/javascript" src="https://livejs.com/live.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Hunt the Wumpus in Python</h1>
+
+
+<div id="outline-container-orgf08459c" class="outline-2">
+<h2 id="orgf08459c">The Game</h2>
+<div class="outline-text-2" id="text-orgf08459c">
+<p>
+In this game the player is a hunter exploring a cave system. The cave consists of 20 rooms. Each room connects to 3
+other rooms. The layout corresponds to the vertices and edges on a dodecahedron. There are three kinds of obstacles in
+the caves.
+</p>
+
+<p>
+The first one is the <span class="sc">Wumpus</span>. Normally the Wumpus sleeps, only waking if the hunter enters the same room as the Wumpus
+(in which case, the Wumpus eats the hunter), or if the hunter shoots an arrow and misses the Wumpus. In that case, the
+Wumpus wakes up and moves to a random adjacent room.  If the hunter happens to be in that room, the hunter gets eaten.
+If the hunter is next to a room with a Wumpus, the computer will say &ldquo;I smell a Wumpus.&rdquo;
+</p>
+
+<p>
+The second obstacle is pits. There are two of these. If the hunter is adjacent to a pit the computer says, &ldquo;I feel a
+draft.&rdquo; If the adventurer enters a room with a pit, they fall to their death.
+</p>
+
+<p>
+The third obstacle is bats. There are two of them in the caves. If the adventurer moves into a room with a bat then the
+bat picks up the adventurer and drops them into a random room before flying to a new location. Those rooms might contain
+the other bat, the Wumpus, or a pit, resulting in the expected consequences. If the adventurer is next to a room with a
+bat the computer says, &ldquo;I hear a bat.&rdquo;
+</p>
+
+<p>
+The adventurer has five <span class="sc">Crooked Arrow</span>s. When the adventurer wants to shoot the arrow they enter a path of up to five
+rooms that the arrow should follow. If the arrow hits the Wumpus the player wins. If the arrow hits the player then the
+player loses. The main reason this might happen is if the next room in a path is not reachable from the arrow&rsquo;s current
+room then the arrow travels randomly from then on.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org56d64b4" class="outline-2">
+<h2 id="org56d64b4">Headers</h2>
+<div class="outline-text-2" id="text-org56d64b4">
+<p>
+To get started with the code, we need three lines:
+</p>
+
+<pre class="code"><code><span class="linenr">1: </span><span style="color: #5B6268;">#</span><span style="color: #5B6268;">!/usr/bin/env python3</span>
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #51afef;">import</span> random
+<span class="linenr">4: </span><span style="color: #51afef;">import</span> sys
+</code></pre>
+
+<p>
+The first one allows us to execute the file directly as a <span class="sc">Python</span> script, and is useful on Linux and Mac computers.
+The two <code>import</code> statements give us access to extra libraries that will be useful to the game.
+</p>
+
+<ul class="org-ul">
+<li>We import the <code>random</code> library so we have access to the <code>shuffle</code> function.</li>
+<li>We import <code>sys</code> so that we can have access to the <code>exit</code> function (for when we quit or the player ends the game).</li>
+</ul>
+</div>
+
+<div id="outline-container-orgccd3cc6" class="outline-3">
+<h3 id="orgccd3cc6">Details about Imports</h3>
+<div class="outline-text-3" id="text-orgccd3cc6">
+<ul class="org-ul">
+<li>There are several ways to use <code>import</code>.
+<ul class="org-ul">
+<li><code>import random</code> will allow the rest of the program to use this library via &ldquo;dot notation&rdquo;:</li>
+<li>e.g., <code>random.shuffle(rooms)</code> will take the list <code>rooms</code> and shuffle them.</li>
+</ul></li>
+<li>We could also do it another way:
+<ul class="org-ul">
+<li><code>from random import shuffle</code> makes the <code>shuffle</code> function &ldquo;top level&rdquo;, as if we defined it ourself.</li>
+<li>e.g. <code>shuffle(rooms)</code></li>
+<li>This style <b>only</b> imports <code>shuffle</code>.</li>
+</ul></li>
+<li>If we want everything in the <code>random</code> library, we can do this;
+<ul class="org-ul">
+<li><code>from random import *</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff2126b" class="outline-2">
+<h2 id="orgff2126b">The Entity Class</h2>
+<div class="outline-text-2" id="text-orgff2126b">
+<pre class="code"><code><span class="linenr"> 5: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Entity</span>:
+<span class="linenr"> 6: </span>  <span style="color: #dcaeea;">room</span> = -<span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr"> 7: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>,room=-<span style="color: #da8548; font-weight: bold;">1</span>):
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">self</span>.room = room
+<span class="linenr"> 9: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">sameRoom</span>(<span style="color: #51afef;">self</span>,player):
+<span class="linenr">10: </span>    <span style="color: #51afef;">pass</span>
+<span class="linenr">11: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">adjacent</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">12: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You are next to an entity."</span>)
+</code></pre>
+
+<p>
+We decided to use object oriented programming to write this program. We create objects using a recipe called a <code>class</code>.
+The main class here is <code>Entity</code>. An <code>Entity</code> has four properties to go with it.
+</p>
+<ul class="org-ul">
+<li>A variable called <code>room</code> to keep track of where it is. We initialize it to <code>-1</code> so that we know it&rsquo;s not in the cave
+yet.</li>
+<li>A function <code>__init__</code>. This one is special; it&rsquo;s called a <i>constructor</i>. The program calls it when an object is first
+created. There is a parameter <code>room</code> that we can set when we call this; if we don&rsquo;t it will default to <code>-1</code>.</li>
+<li>A function <code>sameRoom</code> that takes a <code>player</code> object. This allows the entity to do something to the player (like move
+them or kill them).</li>
+<li>A function <code>adjacent</code> that gives the message corresponding to the entity of the player is in the room next to it.</li>
+</ul>
+
+<p>
+Notice that all the functions<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
+Functions that belong to a class or object are usually called <i>methods</i>.  We&rsquo;ll call them that from now on.
+</span> have an initial parameter <code>self</code>. We do not pass that in directly; the object
+system does that for us. We will see examples of that later.
+</p>
+
+<p>
+You will notice tht the <code>sameRoom</code> method just has the word <code>pass</code>. <span class="sc">Python</span> gets confused if a method is empty, even if
+we don&rsquo;t want it to do anything, so the keyword <code>pass</code> fills the space for us.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc4289b6" class="outline-2">
+<h2 id="orgc4289b6">The Player</h2>
+<div class="outline-text-2" id="text-orgc4289b6">
+<pre class="code"><code><span class="linenr">13: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Player</span>(Entity):
+<span class="linenr">14: </span>  <span style="color: #dcaeea;">isAlive</span> = <span style="color: #a9a1e1;">True</span>
+<span class="linenr">15: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">adjacent</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">16: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You are beside yourself!"</span>)
+</code></pre>
+
+<p>
+We will start off defining the player. The syntax <code>Player(Entity)</code> says we are creating a new class called <code>Player</code> that
+is a kind of <code>Entity</code>. Everything that was in <code>Entity</code> is &ldquo;copy pasted&rdquo; into <code>Player</code>. The official term for this is
+<i>inheritance</i>.  There are two definitions inside:
+</p>
+<ul class="org-ul">
+<li>A variable <code>isAlive</code> which defaults to <code>True</code>.  You can probably guess what we want that for.</li>
+<li>A method <code>adjacent</code>, just like the one in <code>Entity</code> but with different instructions. The <code>Player</code> definition of
+<code>adjacent</code> will override the definition inherited from <code>Entity</code>.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge7265c6" class="outline-2">
+<h2 id="orge7265c6">Bats</h2>
+<div class="outline-text-2" id="text-orge7265c6">
+<pre class="code"><code><span class="linenr">17: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Bat</span>(Entity):
+<span class="linenr">18: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">sameRoom</span>(<span style="color: #51afef;">self</span>,player):
+<span id="coderef-check" class="coderef-off"><span class="linenr">19: </span>    <span style="color: #51afef;">if</span> player.room == <span style="color: #51afef;">self</span>.room:</span>
+<span class="linenr">20: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"Oh no!  A bat picks you up!  Weeeeeeeeee!"</span>)
+<span class="linenr">21: </span>      <span style="color: #dcaeea;">rooms</span> = <span style="color: #c678dd;">list</span>(<span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">20</span>))
+<span class="linenr">22: </span>      random.shuffle(rooms)
+<span class="linenr">23: </span>
+<span class="linenr">24: </span>      <span style="color: #dcaeea;">player.room</span> = rooms[<span style="color: #da8548; font-weight: bold;">0</span>]
+<span class="linenr">25: </span>      <span style="color: #51afef;">self</span>.room = rooms[<span style="color: #da8548; font-weight: bold;">1</span>]
+<span class="linenr">26: </span>
+<span class="linenr">27: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You got dropped in room"</span>,player.room)
+<span class="linenr">28: </span>
+<span class="linenr">29: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">adjacent</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">30: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You hear a bat."</span>)
+</code></pre>
+
+<p>
+Bats!  We override <code>adjacent</code> with the message for bats.  We also override the <code>sameRoom</code> method.
+</p>
+
+<p>
+The <code>sameRoom</code> method checks on line <a href="#coderef-check" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-check');" onmouseout="CodeHighlightOff(this, 'coderef-check');">19</a> if the player is in the same room as the bat. If it is, we print out a message
+and then create a list of rooms.  The room numbers go from 0 to 19, and <code>list(range(0,20))</code> will give us a list of those numbers.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">
+The function <code>range</code> gives us a list-like thing that works well with <code>for</code> loops.
+The <code>list</code> function coerces it to be an actual list for us.
+</span>
+</p>
+
+<p>
+Once we have that list we call <code>random.shuffle</code> on it.  We put the player if the first room of the list and the bat is the second room.
+This ensures that the player and the bat end up in different places.  (The player might get dropped onto the second bat though.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb927462" class="outline-2">
+<h2 id="orgb927462">Pits</h2>
+<div class="outline-text-2" id="text-orgb927462">
+<pre class="code"><code><span class="linenr">31: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Pit</span>(Entity):
+<span class="linenr">32: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">sameRoom</span>(<span style="color: #51afef;">self</span>,player):
+<span class="linenr">33: </span>    <span style="color: #51afef;">if</span> player.room == <span style="color: #51afef;">self</span>.room:
+<span class="linenr">34: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"Oh no!  You fell down a pit! SPLAT!"</span>)
+<span class="linenr">35: </span>      <span style="color: #dcaeea;">player.isAlive</span> = <span style="color: #a9a1e1;">False</span>
+<span class="linenr">36: </span>
+<span class="linenr">37: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">adjacent</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">38: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You feel a draft."</span>)
+</code></pre>
+
+<p>
+Pits are like bats but simpler.  If the adventurer is in the same room, we set <code>player.isAlive</code> to <code>False</code>, ending the game.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2bf3a0c" class="outline-2">
+<h2 id="org2bf3a0c">The Wumpus</h2>
+<div class="outline-text-2" id="text-org2bf3a0c">
+<pre class="code"><code><span class="linenr">39: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Wumpus</span>(Entity):
+<span class="linenr">40: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">sameRoom</span>(<span style="color: #51afef;">self</span>,player):
+<span class="linenr">41: </span>    <span style="color: #51afef;">if</span> player.room == <span style="color: #51afef;">self</span>.room:
+<span class="linenr">42: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"Oh no!  The Wumpus is here!  CHOMP CHOMP CHOMP!"</span>)
+<span class="linenr">43: </span>      <span style="color: #dcaeea;">player.isAlive</span> = <span style="color: #a9a1e1;">False</span>
+<span class="linenr">44: </span>
+<span class="linenr">45: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">adjacent</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">46: </span>    <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You smell a Wumpus."</span>)
+</code></pre>
+
+<p>
+Handling the Wumpus use the same logic as bats, just with different messages.  The movement behavior will happen in the main loop.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge465d65" class="outline-2">
+<h2 id="orge465d65">The <code>Game</code> Class</h2>
+<div class="outline-text-2" id="text-orge465d65">
+</div>
+<div id="outline-container-org487f529" class="outline-3">
+<h3 id="org487f529">Initializing the Member Variables</h3>
+<div class="outline-text-3" id="text-org487f529">
+<pre class="code"><code><span class="linenr">47: </span><span style="color: #51afef;">class</span> <span style="color: #ECBE7B;">Game</span>():
+<span class="linenr">48: </span>  <span style="color: #dcaeea;">maze</span> = {<span style="color: #da8548; font-weight: bold;">1</span>:[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">4</span>],<span style="color: #da8548; font-weight: bold;">2</span>:[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">6</span>],<span style="color: #da8548; font-weight: bold;">3</span>:[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">8</span>],<span style="color: #da8548; font-weight: bold;">4</span>:[<span style="color: #da8548; font-weight: bold;">1</span>,<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">10</span>],<span style="color: #da8548; font-weight: bold;">5</span>:[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">11</span>]
+<span class="linenr">49: </span>       ,<span style="color: #da8548; font-weight: bold;">6</span>:[<span style="color: #da8548; font-weight: bold;">2</span>,<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">12</span>],<span style="color: #da8548; font-weight: bold;">7</span>:[<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">13</span>],<span style="color: #da8548; font-weight: bold;">8</span>:[<span style="color: #da8548; font-weight: bold;">3</span>,<span style="color: #da8548; font-weight: bold;">10</span>,<span style="color: #da8548; font-weight: bold;">14</span>],<span style="color: #da8548; font-weight: bold;">9</span>:[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">15</span>],<span style="color: #da8548; font-weight: bold;">10</span>:[<span style="color: #da8548; font-weight: bold;">4</span>,<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">16</span>]
+<span class="linenr">50: </span>       ,<span style="color: #da8548; font-weight: bold;">11</span>:[<span style="color: #da8548; font-weight: bold;">5</span>,<span style="color: #da8548; font-weight: bold;">12</span>,<span style="color: #da8548; font-weight: bold;">17</span>],<span style="color: #da8548; font-weight: bold;">12</span>:[<span style="color: #da8548; font-weight: bold;">6</span>,<span style="color: #da8548; font-weight: bold;">11</span>,<span style="color: #da8548; font-weight: bold;">18</span>],<span style="color: #da8548; font-weight: bold;">13</span>:[<span style="color: #da8548; font-weight: bold;">7</span>,<span style="color: #da8548; font-weight: bold;">14</span>,<span style="color: #da8548; font-weight: bold;">18</span>],<span style="color: #da8548; font-weight: bold;">14</span>:[<span style="color: #da8548; font-weight: bold;">8</span>,<span style="color: #da8548; font-weight: bold;">13</span>,<span style="color: #da8548; font-weight: bold;">19</span>],<span style="color: #da8548; font-weight: bold;">15</span>:[<span style="color: #da8548; font-weight: bold;">9</span>,<span style="color: #da8548; font-weight: bold;">16</span>,<span style="color: #da8548; font-weight: bold;">17</span>]
+<span class="linenr">51: </span>       ,<span style="color: #da8548; font-weight: bold;">16</span>:[<span style="color: #da8548; font-weight: bold;">10</span>,<span style="color: #da8548; font-weight: bold;">15</span>,<span style="color: #da8548; font-weight: bold;">19</span>],<span style="color: #da8548; font-weight: bold;">17</span>:[<span style="color: #da8548; font-weight: bold;">11</span>,<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">15</span>],<span style="color: #da8548; font-weight: bold;">18</span>:[<span style="color: #da8548; font-weight: bold;">12</span>,<span style="color: #da8548; font-weight: bold;">13</span>,<span style="color: #da8548; font-weight: bold;">0</span>],<span style="color: #da8548; font-weight: bold;">19</span>:[<span style="color: #da8548; font-weight: bold;">14</span>,<span style="color: #da8548; font-weight: bold;">16</span>,<span style="color: #da8548; font-weight: bold;">0</span>],<span style="color: #da8548; font-weight: bold;">0</span>:[<span style="color: #da8548; font-weight: bold;">17</span>,<span style="color: #da8548; font-weight: bold;">18</span>,<span style="color: #da8548; font-weight: bold;">19</span>]}
+</code></pre>
+
+<p>
+The beginning of the <code>Game</code> class defines the <code>maze</code> structure.  This is a dictionary.  If we called <code>maze[3]</code> for instance, we would get the list
+<code>[1,7,8]</code> back.  This is how we will keep track of which rooms are adjacent.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b8321b" class="outline-3">
+<h3 id="org9b8321b">The <code>Game</code> Class Constructor</h3>
+<div class="outline-text-3" id="text-org9b8321b">
+<pre class="code"><code><span class="linenr">52: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">__init__</span>(<span style="color: #51afef;">self</span>):
+<span class="linenr">53: </span>     <span style="color: #dcaeea;">rooms</span> = <span style="color: #c678dd;">list</span>(<span style="color: #c678dd;">range</span>(<span style="color: #da8548; font-weight: bold;">0</span>,<span style="color: #da8548; font-weight: bold;">20</span>))
+<span class="linenr">54: </span>     random.shuffle(rooms)
+<span class="linenr">55: </span>
+<span id="coderef-init1" class="coderef-off"><span class="linenr">56: </span>     <span style="color: #51afef;">self</span>.player = Player(rooms[<span style="color: #da8548; font-weight: bold;">0</span>])</span>
+<span class="linenr">57: </span>     <span style="color: #51afef;">self</span>.wumpus = Wumpus(rooms[<span style="color: #da8548; font-weight: bold;">1</span>])
+<span class="linenr">58: </span>     <span style="color: #51afef;">self</span>.bat1 = Bat(rooms[<span style="color: #da8548; font-weight: bold;">2</span>])
+<span class="linenr">59: </span>     <span style="color: #51afef;">self</span>.bat2 = Bat(rooms[<span style="color: #da8548; font-weight: bold;">3</span>])
+<span class="linenr">60: </span>     <span style="color: #51afef;">self</span>.pit1 = Pit(rooms[<span style="color: #da8548; font-weight: bold;">4</span>])
+<span id="coderef-init2" class="coderef-off"><span class="linenr">61: </span>     <span style="color: #51afef;">self</span>.pit2 = Pit(rooms[<span style="color: #da8548; font-weight: bold;">5</span>])</span>
+<span class="linenr">62: </span>
+<span class="linenr">63: </span>     <span style="color: #51afef;">self</span>.entities = [<span style="color: #51afef;">self</span>.wumpus,
+<span class="linenr">64: </span>                 <span style="color: #51afef;">self</span>.bat1, <span style="color: #51afef;">self</span>.bat2,
+<span class="linenr">65: </span>                 <span style="color: #51afef;">self</span>.pit1, <span style="color: #51afef;">self</span>.pit2]
+</code></pre>
+
+<p>
+In the constructor we shuffle the list of rooms like we did with the bats.  This time we pick the first six entries and  assign them to the entities
+as we create them on lines <a href="#coderef-init1" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-init1');" onmouseout="CodeHighlightOff(this, 'coderef-init1');">56</a> &#x2013; <a href="#coderef-init2" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-init2');" onmouseout="CodeHighlightOff(this, 'coderef-init2');">61</a>.  The <code>self.entities</code> line saves them all in one place so we can loop through them later.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6e7b72e" class="outline-3">
+<h3 id="org6e7b72e">The play Method: Where am I and What&rsquo;s Near?</h3>
+<div class="outline-text-3" id="text-org6e7b72e">
+<pre class="code"><code><span class="linenr">66: </span>  <span style="color: #51afef;">def</span> <span style="color: #c678dd;">play</span>(<span style="color: #51afef;">self</span>):
+<span id="coderef-mainloop" class="coderef-off"><span class="linenr">67: </span>    <span style="color: #51afef;">while</span> <span style="color: #51afef;">self</span>.player.isAlive:</span>
+<span class="linenr">68: </span>      <span style="color: #dcaeea;">loc</span> = <span style="color: #51afef;">self</span>.player.room
+<span class="linenr">69: </span>      <span style="color: #dcaeea;">adj</span> = <span style="color: #51afef;">self</span>.maze[loc]
+<span class="linenr">70: </span>      <span style="color: #51afef;">print</span>()
+<span class="linenr">71: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You are in room"</span>,loc)
+<span class="linenr">72: </span>      <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"You are next to rooms: "</span>,adj)
+<span id="coderef-adjacent" class="coderef-off"><span class="linenr">73: </span>      <span style="color: #51afef;">for</span> e <span style="color: #51afef;">in</span> <span style="color: #51afef;">self</span>.entities:</span>
+<span class="linenr">74: </span>        <span style="color: #51afef;">if</span> e.room <span style="color: #51afef;">in</span> adj:
+<span class="linenr">75: </span>          e.adjacent()
+</code></pre>
+
+<p>
+Line <a href="#coderef-mainloop" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-mainloop');" onmouseout="CodeHighlightOff(this, 'coderef-mainloop');">67</a> begins the <i>main loop</i>.  As long as the player is alive it will print out a greeting, read in a command, and determine the results.
+We start by creating two variables <code>loc</code> and <code>adj</code> to keep track of the player&rsquo;s location and the adjacent rooms.  We don&rsquo;t really need these variables,
+but it saves a lot of typing.
+</p>
+
+<p>
+Next we print out the current location and the numbers of the adjacent rooms.
+</p>
+
+<p>
+On line <a href="#coderef-adjacent" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-adjacent');" onmouseout="CodeHighlightOff(this, 'coderef-adjacent');">73</a> we loop through the entity list we created in the constructor.  The variable <code>e</code> &ldquo;takes turns&rdquo; being each one of the five
+entities in that list.  For each one of them we check if the entity is adjacent to the adventurer, and if so, we print its message.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1961ee2" class="outline-3">
+<h3 id="org1961ee2">The play Method: Getting the Command</h3>
+<div class="outline-text-3" id="text-org1961ee2">
+<pre class="code"><code><span class="linenr">76: </span>      <span style="color: #dcaeea;">cmd</span> = <span style="color: #98be65;">"x"</span>
+<span class="linenr">77: </span>      <span style="color: #51afef;">while</span> <span style="color: #51afef;">not</span> cmd <span style="color: #51afef;">in</span> [<span style="color: #98be65;">'m'</span>,<span style="color: #98be65;">'s'</span>,<span style="color: #98be65;">'q'</span>]:
+<span id="coderef-input" class="coderef-off"><span class="linenr">78: </span>        <span style="color: #dcaeea;">cmd</span> = <span style="color: #c678dd;">input</span>(<span style="color: #98be65;">"Move, Shoot, or Quit? [m/s/q] "</span>)</span>
+<span class="linenr">79: </span>      <span style="color: #51afef;">if</span> cmd==<span style="color: #98be65;">'q'</span>:
+<span class="linenr">80: </span>        <span style="color: #51afef;">print</span>(<span style="color: #98be65;">"Goodbye!"</span>)
+<span class="linenr">81: </span>        sys.<span style="color: #a9a1e1;">exit</span>(<span style="color: #da8548; font-weight: bold;">0</span>)
+</code></pre>
+
+<p>
+Next comes another loop.  We want to ask the player what to do, and if the player types in wrong input we want to ask again.  We are going to use the
+variable <code>cmd</code> to store the player&rsquo;s input.  One trick is to pre-set the variable <code>cmd</code> to something we know to be invalid (in this case <code>"x"</code>) so the
+loop will run at least once.  Line <a href="#coderef-input" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-input');" onmouseout="CodeHighlightOff(this, 'coderef-input');">78</a> asks for the command and reads it in.
+</p>
+
+<p>
+If the command is to quit we exit the game.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgedad6c2" class="outline-3">
+<h3 id="orgedad6c2">The play Method: Motion and Consequences</h3>
+<div class="outline-text-3" id="text-orgedad6c2">
+<pre class="code"><code><span class="linenr">82: </span>      <span style="color: #dcaeea;">room</span> = -<span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">83: </span>      <span style="color: #51afef;">while</span> <span style="color: #51afef;">not</span> room <span style="color: #51afef;">in</span> adj:
+<span class="linenr">84: </span>        <span style="color: #dcaeea;">room</span> = <span style="color: #c678dd;">int</span>(<span style="color: #c678dd;">input</span>(<span style="color: #98be65;">"Enter a room number."</span>))
+<span class="linenr">85: </span>
+<span class="linenr">86: </span>      <span style="color: #51afef;">if</span> cmd==<span style="color: #98be65;">'m'</span>:
+<span class="linenr">87: </span>        <span style="color: #51afef;">self</span>.player.room = room
+<span class="linenr">88: </span>
+<span class="linenr">89: </span>        <span style="color: #dcaeea;">oldRoom</span> = -<span style="color: #da8548; font-weight: bold;">1</span>
+<span id="coderef-alive" class="coderef-off"><span class="linenr">90: </span>        <span style="color: #51afef;">while</span> <span style="color: #51afef;">self</span>.player.room != oldRoom <span style="color: #51afef;">and</span> <span style="color: #51afef;">self</span>.player.isAlive:</span>
+<span class="linenr">91: </span>          <span style="color: #dcaeea;">oldRoom</span> = <span style="color: #51afef;">self</span>.player.room
+<span class="linenr">92: </span>          <span style="color: #51afef;">for</span> e <span style="color: #51afef;">in</span> <span style="color: #51afef;">self</span>.entities:
+<span class="linenr">93: </span>            e.sameRoom(<span style="color: #51afef;">self</span>.player)
+</code></pre>
+
+<p>
+We use a similar trick to move to a new room. We ask the player for a room number, and ask again if it&rsquo;s not valid. The
+<code>int()</code> function converts a string into an integer for us. This will crash the program is the user types in something
+that&rsquo;s not an integer.  There are methods to handle errors in <span class="sc">Python</span>.  A simpler thing we could do is
+change <code>maze</code> so that its entries were strings instead of integers.
+</p>
+
+<p>
+Once we have a valid room we check that the command was to move.<label for="3" class="margin-toggle sidenote-number"></label><input type="checkbox" id="3" class="margin-toggle"/><span class="sidenote">
+This is really out of order; we should check if the player wanted to move first.  This way would work though if we
+only wanted the arrow to go one room over and not up to five.
+</span>
+</p>
+
+<p>
+We now set <code>oldRoom</code> to <code>-1</code> (to ensure the following loop runs at least once) and then, while the player is in a
+different room than before we update <code>oldRoom</code> to be the player&rsquo;s room and then check with each of the entities if
+something happens. If a bat gets the adventurer then <code>oldRoom</code> will be different from <code>self.player.room</code> in the next
+round so it will check again.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgcb944a2" class="outline-2">
+<h2 id="orgcb944a2">Start the Game</h2>
+<div class="outline-text-2" id="text-orgcb944a2">
+<pre class="code"><code><span class="linenr">94: </span><span style="color: #dcaeea;">g</span> = Game()
+<span class="linenr">95: </span>g.play()
+</code></pre>
+
+<p>
+Finally!  We can start the game.  We just create a <code>Game</code> object and run its <code>play</code> method.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org83bb312" class="outline-2">
+<h2 id="org83bb312">Future Work</h2>
+<div class="outline-text-2" id="text-org83bb312">
+<p>
+Here are some ideas if you&rsquo;d like to develop this further.
+</p>
+
+<ul class="org-ul">
+<li>We didn&rsquo;t implement shooting an arrow!  Try adding that.</li>
+<li>Mazes don&rsquo;t have to be dodecahedrons.  Maybe add several other maze shapes to use.</li>
+<li>To make it more exploratory, we could shuffle the numbers in the maze array so that the rooms aren&rsquo;t connected to the same numbers each time you play.</li>
+<li>Hook it to a web site using <code>flask</code>.</li>
+</ul>
+</div>
+</div>
+<!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+Functions that belong to a class or object are usually called <i>methods</i>.  We&rsquo;ll call them that from now on.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+The function <code>range</code> gives us a list-like thing that works well with <code>for</code> loops.
+The <code>list</code> function coerces it to be an actual list for us.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+This is really out of order; we should check if the player wanted to move first.  This way would work though if we
+only wanted the arrow to go one room over and not up to five.
+</p></div></div>
+
+ --></div>
+<div id="postamble" class="status">
+<p class="author">Author: Mattox Beckman</p>
+<p class="date">Created: 2022-02-20 Sun 22:19</p>
+</div>
+</body>
+</html>
