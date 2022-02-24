@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-24 Thu 13:22 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programming in C++</title>
+<meta name="author" content="Mattox Beckman" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" href="css/tufte.css" type="text/css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Programming in C++
+<br />
+<span class="subtitle">A Quick-Start Guide</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3e4fdaa">First Program</a></li>
+<li><a href="#org96bf3e1">Variables and Functions</a>
+<ul>
+<li><a href="#org58f102c">Global Variables</a></li>
+<li><a href="#orgcf9a5b5">Functions</a></li>
+<li><a href="#orgaf3986a">Exercises:</a></li>
+</ul>
+</li>
+<li><a href="#orgd58dd84">Conditions</a></li>
+<li><a href="#org48cee0c">Loops</a>
+<ul>
+<li><a href="#org10c9b8e">While loops</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+The purpose of this guide is to help you get started with C++ quickly, for example so that you can   I am going to skip
+quite a few subtleties as a result, but you can pick these up later if you want.  I will assume that you are a beginning
+programmer.  If you are more experienced, this guide will probably not be suitable for you.  I will make analogies to
+<span class="sc">Python</span>, but you can ignore them if you don&rsquo;t know that language.
+</p>
+
+<div id="outline-container-org3e4fdaa" class="outline-2">
+<h2 id="org3e4fdaa">First Program</h2>
+<div class="outline-text-2" id="text-org3e4fdaa">
+<p>
+For your first program, go to the site <a href="https://replit.com/@mattox/CPP-First#main.cpp">https://replit.com/@mattox/CPP-First#main.cpp</a> .
+</p>
+
+<p>
+You will see three panes. The left-most pane labeled <i>Files</i>, with a few icons on the side. There will be one file
+listed there, <code>main.cpp</code>. You should mouse-over the icons to see what they do. Click on the paper icon at the top to get
+back to the file list.
+</p>
+
+<p>
+The second pane (in the middle) is the actual source code. It will have a small program in it, which we will talk about
+in a minute.
+</p>
+
+<p>
+The last pane has two tabs, <code>Console</code> and <code>Shell</code>. They are almost identical in functionality.
+</p>
+
+<p>
+If you click <code>Run</code> at the top, you will see this in the shell window:
+</p>
+
+<pre class="code"><code>&gt; <span style="color: #ECBE7B;">make</span> -s
+&gt; ./main
+Hello World!
+&gt;
+</code></pre>
+
+<p>
+The <code>&gt;</code> character is called the <i>prompt</i>, and allows you to input commands if you want.
+The command <code>make</code> builds the program for you.  The command <code>./main</code> runs the program.
+</p>
+
+<p>
+Now let&rsquo;s look at the program.
+</p>
+
+<pre class="code"><code><span id="coderef-include" class="coderef-off"><span class="linenr">1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;iostream&gt;</span></span>
+<span class="linenr">2: </span>
+<span id="coderef-main" class="coderef-off"><span class="linenr">3: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {</span>
+<span class="linenr">4: </span>  <span style="color: #a9a1e1;">std</span>::cout &lt;&lt; <span style="color: #98be65;">"Hello World!\n"</span>;
+<span class="linenr">5: </span>}
+</code></pre>
+
+<p>
+Unlike languages like <span class="sc">Python</span>, C++ does not include very many builtin functions.  If you want to use something,
+you need to use a <code>#include</code> command, which is similar to the <code>import</code> command in <span class="sc">Python</span>.  Line <a href="#coderef-include" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-include');" onmouseout="CodeHighlightOff(this, 'coderef-include');">1</a>
+includes the definitions for the <code>iostream</code> package.  This allows us to do input and output operations.
+</p>
+
+<p>
+Line <a href="#coderef-main" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-main');" onmouseout="CodeHighlightOff(this, 'coderef-main');">3</a> declares the <code>main</code> function.  This is the function that will run when we start the program.  The <code>int</code> means
+that this function will return an integer value.  The convention is if <code>main</code> return the number 0 it means the program executed
+correctly.  If it returns a non-zero, then some kind of error happened.  We are not going to make much use of that.
+</p>
+
+<p>
+The <code>()</code> part means that this function has no parameters. Finally, you see a <code>{</code> and a corresponding <code>}</code> two lines
+later. These are called &ldquo;curly braces&rdquo; and indicate where the function&rsquo;s code begins and ends. (The code that belongs to
+a function is often called the <i>body</i> of the function.)
+</p>
+
+<p>
+Finally, there is one line that tells the program to print out <code>"Hello World!"</code>, the traditional thing to write to demonstrate a
+program in a new language.  The <code>std::cout</code> says to use the <code>cout</code> (short for <i>character output</i>) stream<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
+An input or output channel is called a <i>stream</i> in the C++ world.
+</span>, and the
+<code>std::</code> part says that it is found in the <i>standard namespace</i>.<label for="2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="2" class="margin-toggle"/><span class="sidenote">
+A namespace is a way of collecting and separating variable and function names from each other. Two
+namespaces can each have a variable with the same name but still be able to tell them apart. It&rsquo;s like two families with
+different family names, but each with a child named Ziggy. If two people are in the same family, they can say &ldquo;Ziggy&rdquo;
+without ambiguity. But if you mean the Ziggy from a different family you would use the family name and say &ldquo;Ziggy Patel&rdquo;
+or &ldquo;Ziggy Choi&rdquo; or something like that.
+</span>
+</p>
+
+<p>
+We don&rsquo;t want to have to type <code>std::</code> in front of things all the time, so try modifying the code to look like this:
+</p>
+
+<pre class="code"><code><span class="linenr">1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;iostream&gt;</span>
+<span class="linenr">2: </span>
+<span class="linenr">3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr">4: </span>
+<span class="linenr">5: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">6: </span>  cout &lt;&lt; <span style="color: #98be65;">"Hello World!\n"</span>;
+<span class="linenr">7: </span>}
+</code></pre>
+
+<p>
+The <code>using namespace std</code> line means we can refer to anything in the standard namespace without needing to specify it.
+This would cause problems if you happened to have a variable named <code>cout</code>, but most people don&rsquo;t do things like that.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org96bf3e1" class="outline-2">
+<h2 id="org96bf3e1">Variables and Functions</h2>
+<div class="outline-text-2" id="text-org96bf3e1">
+<p>
+There are three kinds of variables in C++.
+</p>
+<dl class="org-dl">
+<dt>Global variables</dt><dd>These are accessible throughout the program or module.</dd>
+<dt>Local variables</dt><dd>These are defined inside of a function and exist only when a function is called.</dd>
+<dt>Parameters</dt><dd>These variables are also part of a function and get their values from whoever calls the function.</dd>
+</dl>
+
+<p>
+Before a variable can be used it must be declared.  A declaration has three parts: a type, a name, and (optionally) an initial value.
+</p>
+</div>
+
+<div id="outline-container-org58f102c" class="outline-3">
+<h3 id="org58f102c">Global Variables</h3>
+<div class="outline-text-3" id="text-org58f102c">
+<p>
+Consider this program.
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;iostream&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">answer</span> = <span style="color: #da8548; font-weight: bold;">42</span>;
+<span class="linenr"> 6: </span><span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">pi</span> = <span style="color: #da8548; font-weight: bold;">3.14159</span>;
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr"> 9: </span>  cout &lt;&lt; <span style="color: #98be65;">"The answer to the ultimate question is "</span> &lt;&lt; answer &lt;&lt; endl;
+<span class="linenr">10: </span>  cout &lt;&lt; <span style="color: #98be65;">"The number pi is approximately "</span> &lt;&lt; pi &lt;&lt; endl;
+<span class="linenr">11: </span>}
+</code></pre>
+
+<p>
+There are two global variables, <code>answer</code>, which is an integer, and <code>pi</code>, which is a double-precision floating point number.
+I initialized them both at declaration time, but I could have done it in the body of <code>main</code> like this:
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;iostream&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">answer</span>;
+<span class="linenr"> 6: </span><span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">pi</span>;
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr"> 9: </span>  answer = <span style="color: #da8548; font-weight: bold;">42</span>;
+<span class="linenr">10: </span>  pi = <span style="color: #da8548; font-weight: bold;">3.14159</span>;
+<span class="linenr">11: </span>  cout &lt;&lt; <span style="color: #98be65;">"The answer to the ultimate question is "</span> &lt;&lt; answer &lt;&lt; endl;
+<span class="linenr">12: </span>  cout &lt;&lt; <span style="color: #98be65;">"The number pi is approximately "</span> &lt;&lt; pi &lt;&lt; endl;
+<span class="linenr">13: </span>}
+</code></pre>
+
+<p>
+<b>Special Warning:</b> in C++, if you do not initialize a variable, then the contents will be &ldquo;undefined&rdquo;.  The compiler will allocate memory
+for that variable, but it won&rsquo;t clear that memory out first.  If you try to use it, the contents might be 0, or it might be something completely
+random.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcf9a5b5" class="outline-3">
+<h3 id="orgcf9a5b5">Functions</h3>
+<div class="outline-text-3" id="text-orgcf9a5b5">
+<p>
+A function declaration has four parts: a return type, a name, a list of <i>parameters</i>, and a body.
+</p>
+
+<p>
+Here is a simple function that adds two numbers together.
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;iostream&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">double</span> <span style="color: #c678dd;">sum</span>(<span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">b</span>) {
+<span class="linenr"> 6: </span>  <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">result</span>;
+<span class="linenr"> 7: </span>  result = a + b;
+<span class="linenr"> 8: </span>  <span style="color: #51afef;">return</span> result;
+<span class="linenr"> 9: </span>}
+<span class="linenr">10: </span>
+<span class="linenr">11: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">12: </span>  <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">x</span>,<span style="color: #dcaeea;">y</span>;
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>  cout &lt;&lt; <span style="color: #98be65;">"Give me two numbers: "</span>;
+<span class="linenr">15: </span>  cin &gt;&gt; x &gt;&gt; y;
+<span id="coderef-call1" class="coderef-off"><span class="linenr">16: </span>  cout &lt;&lt; <span style="color: #98be65;">"The sum of "</span> &lt;&lt; x &lt;&lt; <span style="color: #98be65;">" and "</span> &lt;&lt; y &lt;&lt; <span style="color: #98be65;">" is "</span> &lt;&lt; sum(x,y) &lt;&lt; endl;</span>
+<span class="linenr">17: </span>}
+</code></pre>
+
+<p>
+In this program, <code>a</code> and <code>b</code> are called <i>parameters</i>. They serve as inputs to the function. When we call the function on
+line <a href="#coderef-call1" class="coderef" onmouseover="CodeHighlightOn(this, 'coderef-call1');" onmouseout="CodeHighlightOff(this, 'coderef-call1');">16</a> the values <code>x</code> and <code>y</code> are called <i>arguments</i>. These two terms sometimes get used interchangeably.
+</p>
+
+<p>
+The variable <code>result</code> is a <i>local variable</i>.  In this code, we assign it the value <code>a+b</code>.
+</p>
+
+<p>
+The <code>return</code> keyword says that the function is done and that the value provided should be the result of the function.
+Try running this function to see how it works.
+</p>
+
+<p>
+This code could have been a lot simpler.  First, we could have initialized <code>result</code> immediately, like this:
+</p>
+
+<pre class="code"><code><span class="linenr">1: </span><span style="color: #ECBE7B;">double</span> <span style="color: #c678dd;">sum</span>(<span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">b</span>) {
+<span class="linenr">2: </span>  <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">result</span> = a + b;
+<span class="linenr">3: </span>  <span style="color: #51afef;">return</span> result;
+<span class="linenr">4: </span>}
+</code></pre>
+
+<p>
+And even then, since we only use that value one time, we could have returned <code>a+b</code> directly like this:
+</p>
+
+<pre class="code"><code><span class="linenr">1: </span><span style="color: #ECBE7B;">double</span> <span style="color: #c678dd;">sum</span>(<span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">b</span>) {
+<span class="linenr">2: </span>  <span style="color: #51afef;">return</span> a+b;
+<span class="linenr">3: </span>}
+</code></pre>
+
+<p>
+It&rsquo;s not wrong to declare a variable and only use it once if it makes your program easier to read or understand, but
+avoid it if it&rsquo;s not necessary.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaf3986a" class="outline-3">
+<h3 id="orgaf3986a">Exercises:</h3>
+<div class="outline-text-3" id="text-orgaf3986a">
+<ul class="org-ul">
+<li>Modify the program to take the sum of three numbers instead of only two.  There are several ways you could go about this.</li>
+<li>Add another function to do subtractions.</li>
+<li>If you add the line <code>#include &lt;bits/stdc++.h&gt;</code> to the top in place of the <code>#include &lt;iostream&gt;</code> you will gain access
+to the <code>sqrt</code> function, that (you guessed it!) takes the square root of a number. Write a function that gives you the
+length of the hypotenuse of a triangle.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd58dd84" class="outline-2">
+<h2 id="orgd58dd84">Conditions</h2>
+<div class="outline-text-2" id="text-orgd58dd84">
+<p>
+Programs need to make decisions in order to do anything interesting.  The most common way to do this is with the <i>if statement</i>.
+An <code>if</code> statement has three parts: a <i>condition</i>, a <i>then-branch</i>, and (optionally) an <i>else-branch</i>.
+</p>
+
+<p>
+Here&rsquo;s an example:
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;bits/stdc++.h&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">double</span> <span style="color: #c678dd;">max</span>(<span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">a</span>, <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">b</span>) {
+<span class="linenr"> 6: </span>  <span style="color: #51afef;">if</span> (a&gt;b) {
+<span class="linenr"> 7: </span>    <span style="color: #51afef;">return</span> a;
+<span class="linenr"> 8: </span>  } <span style="color: #51afef;">else</span> {
+<span class="linenr"> 9: </span>    <span style="color: #51afef;">return</span> b;
+<span class="linenr">10: </span>  }
+<span class="linenr">11: </span>}
+<span class="linenr">12: </span>
+<span class="linenr">13: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">14: </span>  <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">x</span>,<span style="color: #dcaeea;">y</span>;
+<span class="linenr">15: </span>
+<span class="linenr">16: </span>  cout &lt;&lt; <span style="color: #98be65;">"Give me two numbers: "</span>;
+<span class="linenr">17: </span>  cin &gt;&gt; x &gt;&gt; y;
+<span class="linenr">18: </span>  cout &lt;&lt; <span style="color: #98be65;">"The max of "</span> &lt;&lt; x &lt;&lt; <span style="color: #98be65;">" and "</span> &lt;&lt; y &lt;&lt; <span style="color: #98be65;">" is "</span> &lt;&lt; max(x,y) &lt;&lt; endl;
+<span class="linenr">19: </span>}
+</code></pre>
+
+<p>
+Sometimes you don&rsquo;t need the else branch.  Here&rsquo;s an example:
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;bits/stdc++.h&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr"> 6: </span>  <span style="color: #ECBE7B;">double</span> <span style="color: #dcaeea;">x</span>;
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  cout &lt;&lt; <span style="color: #98be65;">"Give me a number: "</span>;
+<span class="linenr"> 9: </span>  cin &gt;&gt; x;
+<span class="linenr">10: </span>
+<span class="linenr">11: </span>  <span style="color: #51afef;">if</span> (x&lt;<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr">12: </span>    x=-x;
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>  cout &lt;&lt; <span style="color: #98be65;">"The absolute value is "</span> &lt;&lt; x &lt;&lt; endl;
+<span class="linenr">15: </span>}
+</code></pre>
+
+<p>
+A few syntax notes:
+</p>
+<ul class="org-ul">
+<li>The condition part is always in parenthesis.</li>
+<li>There is no <code>then</code> keyword, but there is an <code>else</code> keyword.</li>
+<li>You use curly braces to contain the then-branch and the else-branch code.</li>
+<li>The curly braces are optional if the code has only one statement it in.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org48cee0c" class="outline-2">
+<h2 id="org48cee0c">Loops</h2>
+<div class="outline-text-2" id="text-org48cee0c">
+<p>
+Sometimes you want to do something more than once.  Loops are one way to accomplish this.
+There are two kinds of loops you should know.
+</p>
+</div>
+
+<div id="outline-container-org10c9b8e" class="outline-3">
+<h3 id="org10c9b8e">While loops</h3>
+<div class="outline-text-3" id="text-org10c9b8e">
+<p>
+A <code>while</code> loop has a condition and a body.  When it runs, it checks if the condition is true.
+If not, it will exit.  If it is, then it will run the body and then try again.
+</p>
+
+<p>
+Here is the famous factorial function using <code>while</code> loops.
+</p>
+
+<pre class="code"><code><span class="linenr"> 1: </span><span style="color: #51afef; font-weight: bold;">#include</span> <span style="color: #98be65;">&lt;bits/stdc++.h&gt;</span>
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #51afef;">using</span> <span style="color: #51afef;">namespace</span> <span style="color: #a9a1e1;">std</span>;
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">fact</span>(<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">n</span>) {
+<span class="linenr"> 6: </span>  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">result</span> = <span style="color: #da8548; font-weight: bold;">1</span>;
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span>  <span style="color: #51afef;">while</span> (n&gt;<span style="color: #da8548; font-weight: bold;">1</span>) {
+<span class="linenr"> 9: </span>    result *= n;
+<span class="linenr">10: </span>    --n;
+<span class="linenr">11: </span>  }
+<span class="linenr">12: </span>
+<span class="linenr">13: </span>  <span style="color: #51afef;">return</span> result;
+<span class="linenr">14: </span>}
+<span class="linenr">15: </span>
+<span class="linenr">16: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">main</span>() {
+<span class="linenr">17: </span>  <span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">x</span>;
+<span class="linenr">18: </span>
+<span class="linenr">19: </span>  cout &lt;&lt; <span style="color: #98be65;">"Give me a number: "</span>;
+<span class="linenr">20: </span>  cin &gt;&gt; x;
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>  cout &lt;&lt; x &lt;&lt; <span style="color: #98be65;">"! = "</span> &lt;&lt; fact(x) &lt;&lt; endl;
+<span class="linenr">23: </span>}
+</code></pre>
+
+<p>
+Here is a recursive version; we will talk about recursion later.
+</p>
+
+<pre class="code"><code><span class="linenr">1: </span><span style="color: #ECBE7B;">int</span> <span style="color: #c678dd;">fact</span>(<span style="color: #ECBE7B;">int</span> <span style="color: #dcaeea;">n</span>) {
+<span class="linenr">2: </span>  <span style="color: #51afef;">if</span> (n==<span style="color: #da8548; font-weight: bold;">0</span>)
+<span class="linenr">3: </span>    <span style="color: #51afef;">return</span> <span style="color: #da8548; font-weight: bold;">1</span>;
+<span class="linenr">4: </span>
+<span class="linenr">5: </span>  <span style="color: #51afef;">return</span> n * fact(n-<span style="color: #da8548; font-weight: bold;">1</span>);
+<span class="linenr">6: </span>}
+</code></pre>
+
+<p>
+There are two other things to look at here.
+</p>
+
+<p>
+<a href="https://www.codechef.com/problems/FLOW001">https://www.codechef.com/problems/FLOW001</a>
+</p>
+</div>
+</div>
+</div>
+<!-- Footnotes --><!-- 
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+An input or output channel is called a <i>stream</i> in the C++ world.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+A namespace is a way of collecting and separating variable and function names from each other. Two
+namespaces can each have a variable with the same name but still be able to tell them apart. It&rsquo;s like two families with
+different family names, but each with a child named Ziggy. If two people are in the same family, they can say &ldquo;Ziggy&rdquo;
+without ambiguity. But if you mean the Ziggy from a different family you would use the family name and say &ldquo;Ziggy Patel&rdquo;
+or &ldquo;Ziggy Choi&rdquo; or something like that.
+</p></div></div>
+
+ --></div>
+<div id="postamble" class="status">
+<p class="author">Author: Mattox Beckman</p>
+<p class="date">Created: 2022-02-24 Thu 13:22</p>
+</div>
+</body>
+</html>
