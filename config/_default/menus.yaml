@@ -13,3 +13,6 @@ main:
   - name: Lectures
     url: lectures/
     weight: 30
+  - name: Textbook
+    url: writeups/
+    weight: 30
