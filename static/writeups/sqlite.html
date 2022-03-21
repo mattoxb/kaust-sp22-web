@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-03-21 Mon 09:44 -->
+<!-- 2022-03-21 Mon 11:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sqlite</title>
@@ -205,18 +205,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org40e146d">Beginning</a></li>
-<li><a href="#org363f915">Tables</a>
+<li><a href="#org163dff2">Beginning</a></li>
+<li><a href="#orgbc1fed8">Tables</a>
 <ul>
-<li><a href="#org5f81cd2">Basic Tables</a></li>
-<li><a href="#org7118fbd">Selects</a>
+<li><a href="#orgb8830dd">Basic Tables</a></li>
+<li><a href="#orge9b2e13">Selects</a>
 <ul>
-<li><a href="#org0492eb9">Basic Selects</a></li>
-<li><a href="#org43a2360">Searching for attributes</a></li>
-<li><a href="#org801a8d1">Grouping</a></li>
+<li><a href="#orge0a9eac">Basic Selects</a></li>
+<li><a href="#orga7a7fcb">Searching for attributes</a></li>
+<li><a href="#org70ba287">Grouping</a></li>
 </ul>
 </li>
-<li><a href="#orgba5a246">Linking Tables</a></li>
+<li><a href="#orge10ef20">Linking Tables</a></li>
 </ul>
 </li>
 </ul>
@@ -238,9 +238,9 @@ So let&rsquo;s get started!
 </p></li>
 </ul>
 
-<div id="outline-container-org40e146d" class="outline-2">
-<h2 id="org40e146d">Beginning</h2>
-<div class="outline-text-2" id="text-org40e146d">
+<div id="outline-container-org163dff2" class="outline-2">
+<h2 id="org163dff2">Beginning</h2>
+<div class="outline-text-2" id="text-org163dff2">
 <p>
 We are going to use a database called <a href="https://www.sqlite.org/index.html">SQLite3</a>.  Some of its features:
 </p>
@@ -248,7 +248,7 @@ We are going to use a database called <a href="https://www.sqlite.org/index.html
 <li>It is very small, and perfect for &ldquo;embedded databases&rdquo;.  You almost certainly have some SQLite database on your phone.</li>
 <li>It is full featured.  You can enjoy most of the features of a good database system.</li>
 <li>It does not require a server to run.</li>
-<li>Because of that, the sqlite files it saves to are shareable.</li>
+<li>Because of that, the ndsqlite files it saves to are shareable.</li>
 </ul>
 
 <p>
@@ -287,13 +287,13 @@ Select is boring though without data to select, so we need to make some data.
 </div>
 </div>
 
-<div id="outline-container-org363f915" class="outline-2">
-<h2 id="org363f915">Tables</h2>
-<div class="outline-text-2" id="text-org363f915">
+<div id="outline-container-orgbc1fed8" class="outline-2">
+<h2 id="orgbc1fed8">Tables</h2>
+<div class="outline-text-2" id="text-orgbc1fed8">
 </div>
-<div id="outline-container-org5f81cd2" class="outline-3">
-<h3 id="org5f81cd2">Basic Tables</h3>
-<div class="outline-text-3" id="text-org5f81cd2">
+<div id="outline-container-orgb8830dd" class="outline-3">
+<h3 id="orgb8830dd">Basic Tables</h3>
+<div class="outline-text-3" id="text-orgb8830dd">
 <p>
 SQL<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 SQL stands for Structured Query Language.
@@ -340,13 +340,13 @@ Please copy these and put them into your <code>main.sql</code> file and hit <i>R
 </div>
 </div>
 
-<div id="outline-container-org7118fbd" class="outline-3">
-<h3 id="org7118fbd">Selects</h3>
-<div class="outline-text-3" id="text-org7118fbd">
+<div id="outline-container-orge9b2e13" class="outline-3">
+<h3 id="orge9b2e13">Selects</h3>
+<div class="outline-text-3" id="text-orge9b2e13">
 </div>
-<div id="outline-container-org0492eb9" class="outline-4">
-<h4 id="org0492eb9">Basic Selects</h4>
-<div class="outline-text-4" id="text-org0492eb9">
+<div id="outline-container-orge0a9eac" class="outline-4">
+<h4 id="orge0a9eac">Basic Selects</h4>
+<div class="outline-text-4" id="text-orge0a9eac">
 <p>
 To select some data, we can use the <code>select</code> command again.  The most basic select gets everything from the table.
 </p>
@@ -393,9 +393,9 @@ Leviathan Wakes         <span class="org-highlight-numbers-number">2011</span>
 </div>
 
 
-<div id="outline-container-org43a2360" class="outline-4">
-<h4 id="org43a2360">Searching for attributes</h4>
-<div class="outline-text-4" id="text-org43a2360">
+<div id="outline-container-orga7a7fcb" class="outline-4">
+<h4 id="orga7a7fcb">Searching for attributes</h4>
+<div class="outline-text-4" id="text-orga7a7fcb">
 <p>
 You can select for a specific value if you want.
 </p>
@@ -442,7 +442,7 @@ Category Theory  Steve Awodey  Mathematics  <span class="org-highlight-numbers-n
 Average number of pages in your library?
 </p>
 
-<pre class="code"><code>&gt; elect <span class="org-builtin">avg</span>(pages) <span class="org-keyword">from</span> books;
+<pre class="code"><code>&gt; <span class="org-keyword">select</span> <span class="org-builtin">avg</span>(pages) <span class="org-keyword">from</span> books;
 <span class="org-builtin">avg</span>(pages)
 <span class="org-comment">----------------</span>
 <span class="org-highlight-numbers-number">354.666666666667</span>
@@ -450,9 +450,9 @@ Average number of pages in your library?
 </div>
 </div>
 
-<div id="outline-container-org801a8d1" class="outline-4">
-<h4 id="org801a8d1">Grouping</h4>
-<div class="outline-text-4" id="text-org801a8d1">
+<div id="outline-container-org70ba287" class="outline-4">
+<h4 id="org70ba287">Grouping</h4>
+<div class="outline-text-4" id="text-org70ba287">
 <p>
 You can also group queries.
 </p>
@@ -485,9 +485,9 @@ Tolkien          <span class="org-highlight-numbers-number">2</span>
 </div>
 
 
-<div id="outline-container-orgba5a246" class="outline-3">
-<h3 id="orgba5a246">Linking Tables</h3>
-<div class="outline-text-3" id="text-orgba5a246">
+<div id="outline-container-orge10ef20" class="outline-3">
+<h3 id="orge10ef20">Linking Tables</h3>
+<div class="outline-text-3" id="text-orge10ef20">
 <p>
 The next thing we want to do is link tables together.
 </p>
@@ -512,7 +512,7 @@ More formally, it&rsquo;s called a Relational Database Management System or RDMS
  --></div>
 <div id="postamble" class="status">
 <p class="author">Author: Mattox Beckman</p>
-<p class="date">Created: 2022-03-21 Mon 09:44</p>
+<p class="date">Created: 2022-03-21 Mon 11:11</p>
 </div>
 </body>
 </html>
