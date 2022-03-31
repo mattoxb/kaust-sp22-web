@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-03-21 Mon 11:11 -->
+<!-- 2022-03-24 Thu 13:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sqlite</title>
@@ -205,18 +205,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org163dff2">Beginning</a></li>
-<li><a href="#orgbc1fed8">Tables</a>
+<li><a href="#org1fa3e55">Beginning</a></li>
+<li><a href="#org9a5dad4">Tables</a>
 <ul>
-<li><a href="#orgb8830dd">Basic Tables</a></li>
-<li><a href="#orge9b2e13">Selects</a>
+<li><a href="#org29b68fa">Basic Tables</a></li>
+<li><a href="#orgb239eb7">Selects</a>
 <ul>
-<li><a href="#orge0a9eac">Basic Selects</a></li>
-<li><a href="#orga7a7fcb">Searching for attributes</a></li>
-<li><a href="#org70ba287">Grouping</a></li>
+<li><a href="#org9f079bf">Basic Selects</a></li>
+<li><a href="#org52a4ede">Searching for attributes</a></li>
+<li><a href="#orgbc23a84">Grouping</a></li>
 </ul>
 </li>
-<li><a href="#orge10ef20">Linking Tables</a></li>
+<li><a href="#orgd716fdd">Linking Tables</a>
+<ul>
+<li><a href="#org8c677aa">Problems with this approach</a></li>
+</ul>
+</li>
+<li><a href="#orgc9a1177">Foreign Key</a>
+<ul>
+<li><a href="#orga4f874f">Join Tables</a></li>
+<li><a href="#orgc4dd557">Views</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -238,9 +248,9 @@ So let&rsquo;s get started!
 </p></li>
 </ul>
 
-<div id="outline-container-org163dff2" class="outline-2">
-<h2 id="org163dff2">Beginning</h2>
-<div class="outline-text-2" id="text-org163dff2">
+<div id="outline-container-org1fa3e55" class="outline-2">
+<h2 id="org1fa3e55">Beginning</h2>
+<div class="outline-text-2" id="text-org1fa3e55">
 <p>
 We are going to use a database called <a href="https://www.sqlite.org/index.html">SQLite3</a>.  Some of its features:
 </p>
@@ -287,13 +297,13 @@ Select is boring though without data to select, so we need to make some data.
 </div>
 </div>
 
-<div id="outline-container-orgbc1fed8" class="outline-2">
-<h2 id="orgbc1fed8">Tables</h2>
-<div class="outline-text-2" id="text-orgbc1fed8">
+<div id="outline-container-org9a5dad4" class="outline-2">
+<h2 id="org9a5dad4">Tables</h2>
+<div class="outline-text-2" id="text-org9a5dad4">
 </div>
-<div id="outline-container-orgb8830dd" class="outline-3">
-<h3 id="orgb8830dd">Basic Tables</h3>
-<div class="outline-text-3" id="text-orgb8830dd">
+<div id="outline-container-org29b68fa" class="outline-3">
+<h3 id="org29b68fa">Basic Tables</h3>
+<div class="outline-text-3" id="text-org29b68fa">
 <p>
 SQL<label for="1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="1" class="margin-toggle"/><span class="sidenote">
 SQL stands for Structured Query Language.
@@ -340,13 +350,13 @@ Please copy these and put them into your <code>main.sql</code> file and hit <i>R
 </div>
 </div>
 
-<div id="outline-container-orge9b2e13" class="outline-3">
-<h3 id="orge9b2e13">Selects</h3>
-<div class="outline-text-3" id="text-orge9b2e13">
+<div id="outline-container-orgb239eb7" class="outline-3">
+<h3 id="orgb239eb7">Selects</h3>
+<div class="outline-text-3" id="text-orgb239eb7">
 </div>
-<div id="outline-container-orge0a9eac" class="outline-4">
-<h4 id="orge0a9eac">Basic Selects</h4>
-<div class="outline-text-4" id="text-orge0a9eac">
+<div id="outline-container-org9f079bf" class="outline-4">
+<h4 id="org9f079bf">Basic Selects</h4>
+<div class="outline-text-4" id="text-org9f079bf">
 <p>
 To select some data, we can use the <code>select</code> command again.  The most basic select gets everything from the table.
 </p>
@@ -393,9 +403,9 @@ Leviathan Wakes         <span class="org-highlight-numbers-number">2011</span>
 </div>
 
 
-<div id="outline-container-orga7a7fcb" class="outline-4">
-<h4 id="orga7a7fcb">Searching for attributes</h4>
-<div class="outline-text-4" id="text-orga7a7fcb">
+<div id="outline-container-org52a4ede" class="outline-4">
+<h4 id="org52a4ede">Searching for attributes</h4>
+<div class="outline-text-4" id="text-org52a4ede">
 <p>
 You can select for a specific value if you want.
 </p>
@@ -450,9 +460,9 @@ Average number of pages in your library?
 </div>
 </div>
 
-<div id="outline-container-org70ba287" class="outline-4">
-<h4 id="org70ba287">Grouping</h4>
-<div class="outline-text-4" id="text-org70ba287">
+<div id="outline-container-orgbc23a84" class="outline-4">
+<h4 id="orgbc23a84">Grouping</h4>
+<div class="outline-text-4" id="text-orgbc23a84">
 <p>
 You can also group queries.
 </p>
@@ -466,7 +476,7 @@ Marcus Aurelius  <span class="org-highlight-numbers-number">170</span>
 Steve Awodey     <span class="org-highlight-numbers-number">311</span>
 Tolkien          <span class="org-highlight-numbers-number">365</span>
 
-elect author,<span class="org-builtin">count</span>(*) <span class="org-keyword">from</span> books;
+<span class="org-keyword">select</span> author,<span class="org-builtin">count</span>(*) <span class="org-keyword">from</span> books;
 author           <span class="org-builtin">count</span>(*)
 <span class="org-comment">---------------  --------</span>
 Marcus Aurelius  <span class="org-highlight-numbers-number">6</span>
@@ -485,18 +495,200 @@ Tolkien          <span class="org-highlight-numbers-number">2</span>
 </div>
 
 
-<div id="outline-container-orge10ef20" class="outline-3">
-<h3 id="orge10ef20">Linking Tables</h3>
-<div class="outline-text-3" id="text-orge10ef20">
+<div id="outline-container-orgd716fdd" class="outline-3">
+<h3 id="orgd716fdd">Linking Tables</h3>
+<div class="outline-text-3" id="text-orgd716fdd">
 <p>
-The next thing we want to do is link tables together.
+The next thing we want to do is link tables together.  We can join tables using a select.
+Suppose we have a table for books and a table for authors.
+</p>
+
+<pre class="code"><code><span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">books</span> (
+  title text,
+  author_fname text,
+  author_lname text,
+  <span class="org-keyword">year</span> <span class="org-type">integer</span>,
+  pages <span class="org-type">integer</span>,
+  <span class="org-keyword">style</span> text,
+  <span class="org-keyword">read</span> <span class="org-type">boolean</span>
+);
+<span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">authors</span> (
+  fname text,
+  lname text,
+  born <span class="org-type">integer</span>,
+  died <span class="org-type">integer</span>);
+</code></pre>
+
+<p>
+We can add some data now the previous way.
+</p>
+
+<pre class="code"><code><span class="org-keyword">insert</span> <span class="org-keyword">into</span> books <span class="org-keyword">values</span>
+   (<span class="org-string">'Meditations'</span>,<span class="org-string">'Marcus'</span>,<span class="org-string">'Aurelius'</span>,<span class="org-string">'Philosophy'</span>,<span class="org-highlight-numbers-number">170</span>,<span class="org-highlight-numbers-number">180</span>,<span class="org-keyword">true</span>),
+   (<span class="org-string">'The Hobbit'</span>,<span class="org-string">'J.R.R.'</span>,<span class="org-string">'Tolkien'</span>,<span class="org-string">'Fantasy'</span>,<span class="org-highlight-numbers-number">1937</span>,<span class="org-highlight-numbers-number">310</span>,<span class="org-keyword">true</span>),
+   (<span class="org-string">'The Silmarilian'</span>,<span class="org-string">'J.R.R.'</span>,<span class="org-string">'Tolkien'</span>,<span class="org-string">'Fantasy'</span>,<span class="org-highlight-numbers-number">1977</span>,<span class="org-highlight-numbers-number">365</span>,<span class="org-keyword">false</span>),
+   (<span class="org-string">'Category Theory'</span>,<span class="org-string">'Steve'</span>,<span class="org-string">'Awodey'</span>,<span class="org-string">'Mathematics'</span>,<span class="org-highlight-numbers-number">2010</span>,<span class="org-highlight-numbers-number">311</span>,<span class="org-keyword">false</span>),
+   (<span class="org-string">'Conceptual Mathematics'</span>,<span class="org-string">'F. William'</span>,<span class="org-string">'Lawvere'</span>,<span class="org-string">'Mathematics'</span>,<span class="org-highlight-numbers-number">2009</span>,<span class="org-highlight-numbers-number">390</span>,<span class="org-keyword">false</span>),
+   (<span class="org-string">'Leviathan Wakes'</span>,<span class="org-string">'James'</span>,<span class="org-string">'Corey'</span>,<span class="org-string">'Sci Fi'</span>,<span class="org-highlight-numbers-number">2011</span>,<span class="org-highlight-numbers-number">582</span>,<span class="org-keyword">false</span>);
+<span class="org-keyword">insert</span> <span class="org-keyword">into</span> authors <span class="org-keyword">values</span>
+   (<span class="org-string">'Marcus'</span>,<span class="org-string">'Aurelius'</span>,<span class="org-highlight-numbers-number">121</span>,<span class="org-highlight-numbers-number">180</span>),
+   (<span class="org-string">'J.R.R.'</span>,<span class="org-string">'Tolkien'</span>,<span class="org-highlight-numbers-number">1892</span>,<span class="org-highlight-numbers-number">1973</span>),
+   (<span class="org-string">'Steve'</span>,<span class="org-string">'Awodey'</span>,<span class="org-highlight-numbers-number">1959</span>,<span class="org-keyword">NULL</span>),
+   (<span class="org-string">'F. William'</span>,<span class="org-string">'Lawvere'</span>,<span class="org-highlight-numbers-number">1937</span>,<span class="org-keyword">NULL</span>),
+   (<span class="org-string">'Stephen'</span>,<span class="org-string">'Schanuel'</span>,<span class="org-highlight-numbers-number">1933</span>,<span class="org-highlight-numbers-number">2014</span>),
+   (<span class="org-string">'James'</span>,<span class="org-string">'Corey'</span>,<span class="org-highlight-numbers-number">2011</span>,<span class="org-keyword">NULL</span>);
+</code></pre>
+
+<p>
+Suppose we want to have a list of titles, author last name, and author birth year.  We can use <code>select</code> to combine the data from two
+tables.  Here&rsquo;s an example.
+</p>
+
+<pre class="code"><code>&gt; <span class="org-keyword">select</span> books.title, authors.lname, authors.born
+    <span class="org-keyword">from</span> books, authors
+   <span class="org-keyword">where</span> authors.lname = books.author_lname <span class="org-keyword">and</span> authors.fname = books.author_fname;
+title                   lname     born
+<span class="org-comment">----------------------  --------  ----</span>
+Meditations             Aurelius  <span class="org-highlight-numbers-number">121</span>
+The Hobbit              Tolkien   <span class="org-highlight-numbers-number">1892</span>
+The Silmarilian         Tolkien   <span class="org-highlight-numbers-number">1892</span>
+Category Theory         Awodey    <span class="org-highlight-numbers-number">1959</span>
+Conceptual Mathematics  Lawvere   <span class="org-highlight-numbers-number">1937</span>
+Leviathan Wakes         Corey     <span class="org-highlight-numbers-number">2011</span>
+</code></pre>
+
+<p>
+You see that the column names are prefixed by the table they came from.
+</p>
+</div>
+
+<div id="outline-container-org8c677aa" class="outline-4">
+<h4 id="org8c677aa">Problems with this approach</h4>
+<div class="outline-text-4" id="text-org8c677aa">
+<p>
+There are a few things wrong with this.
 </p>
 
 <ul class="org-ul">
-<li>Foreign keys</li>
-<li>Row ids</li>
-<li>views</li>
+<li>Data is duplicated!  We have to repeat the first name and last name columns.  This is inefficient, and error prone.  What if you misspell something?</li>
+<li>Are you wondering who Stephen Schanuel is?  He is the second author of <i>Conceptual Mathematics</i>.</li>
 </ul>
+
+<pre class="code"><code><span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">books</span> (
+  id <span class="org-type">integer</span>,
+  title text,
+  author_id <span class="org-type">integer</span>,
+  <span class="org-keyword">year</span> <span class="org-type">integer</span>,
+  pages <span class="org-type">integer</span>,
+  <span class="org-keyword">style</span> text,
+  <span class="org-keyword">read</span> <span class="org-type">boolean</span>
+);
+<span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">authors</span> (
+  id <span class="org-type">integer</span>,
+  fname text,
+  lname text,
+  born <span class="org-type">integer</span>,
+  died <span class="org-type">integer</span>);
+</code></pre>
+
+<p>
+Now the data&#x2026;.
+</p>
+
+<pre class="code"><code><span class="org-keyword">insert</span> <span class="org-keyword">into</span> books <span class="org-keyword">values</span>
+   (<span class="org-highlight-numbers-number">1</span>,<span class="org-string">'Meditations'</span>,<span class="org-highlight-numbers-number">1</span>,<span class="org-string">'Philosophy'</span>,<span class="org-highlight-numbers-number">170</span>,<span class="org-highlight-numbers-number">180</span>,<span class="org-keyword">true</span>),
+   (<span class="org-highlight-numbers-number">2</span>,<span class="org-string">'The Hobbit'</span>,<span class="org-highlight-numbers-number">2</span>,<span class="org-string">'Fantasy'</span>,<span class="org-highlight-numbers-number">1937</span>,<span class="org-highlight-numbers-number">310</span>,<span class="org-keyword">true</span>),
+   (<span class="org-highlight-numbers-number">3</span>,<span class="org-string">'The Silmarilian'</span>,<span class="org-highlight-numbers-number">2</span>,<span class="org-string">'Fantasy'</span>,<span class="org-highlight-numbers-number">1977</span>,<span class="org-highlight-numbers-number">365</span>,<span class="org-keyword">false</span>),
+   (<span class="org-highlight-numbers-number">4</span>,<span class="org-string">'Category Theory'</span>,<span class="org-highlight-numbers-number">3</span>,<span class="org-string">'Mathematics'</span>,<span class="org-highlight-numbers-number">2010</span>,<span class="org-highlight-numbers-number">311</span>,<span class="org-keyword">false</span>),
+   (<span class="org-highlight-numbers-number">5</span>,<span class="org-string">'Conceptual Mathematics'</span>,<span class="org-highlight-numbers-number">4</span>,<span class="org-string">'Mathematics'</span>,<span class="org-highlight-numbers-number">2009</span>,<span class="org-highlight-numbers-number">390</span>,<span class="org-keyword">false</span>),
+   (<span class="org-highlight-numbers-number">6</span>,<span class="org-string">'Leviathan Wakes'</span>,<span class="org-highlight-numbers-number">6</span>,<span class="org-string">'Sci Fi'</span>,<span class="org-highlight-numbers-number">2011</span>,<span class="org-highlight-numbers-number">582</span>,<span class="org-keyword">false</span>);
+<span class="org-keyword">insert</span> <span class="org-keyword">into</span> authors <span class="org-keyword">values</span>
+   (<span class="org-highlight-numbers-number">1</span>,<span class="org-string">'Marcus'</span>,<span class="org-string">'Aurelius'</span>,<span class="org-highlight-numbers-number">121</span>,<span class="org-highlight-numbers-number">180</span>),
+   (<span class="org-highlight-numbers-number">2</span>,<span class="org-string">'J.R.R.'</span>,<span class="org-string">'Tolkien'</span>,<span class="org-highlight-numbers-number">1892</span>,<span class="org-highlight-numbers-number">1973</span>),
+   (<span class="org-highlight-numbers-number">3</span>,<span class="org-string">'Steve'</span>,<span class="org-string">'Awodey'</span>,<span class="org-highlight-numbers-number">1959</span>,<span class="org-keyword">NULL</span>),
+   (<span class="org-highlight-numbers-number">4</span>,<span class="org-string">'F. William'</span>,<span class="org-string">'Lawvere'</span>,<span class="org-highlight-numbers-number">1937</span>,<span class="org-keyword">NULL</span>),
+   (<span class="org-highlight-numbers-number">5</span>,<span class="org-string">'Stephen'</span>,<span class="org-string">'Schanuel'</span>,<span class="org-highlight-numbers-number">1933</span>,<span class="org-highlight-numbers-number">2014</span>),
+   (<span class="org-highlight-numbers-number">6</span>,<span class="org-string">'James'</span>,<span class="org-string">'Corey'</span>,<span class="org-highlight-numbers-number">2011</span>,<span class="org-keyword">NULL</span>);
+</code></pre>
+
+<p>
+Selection:
+</p>
+
+<pre class="code"><code>&gt; select books.title, authors.lname, authors.born
+    from books, authors
+   where books.author_id = authors.id;
+title                   lname     born
+----------------------  --------  ----
+Meditations             Aurelius  121
+The Hobbit              Tolkien   1892
+The Silmarilian         Tolkien   1892
+Category Theory         Awodey    1959
+Conceptual Mathematics  Lawvere   1937
+Leviathan Wakes         Corey     2011
+</code></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc9a1177" class="outline-3">
+<h3 id="orgc9a1177">Foreign Key</h3>
+<div class="outline-text-3" id="text-orgc9a1177">
+<pre class="code"><code><span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">authors</span> (
+  id <span class="org-type">integer</span>,
+  fname text,
+  lname text,
+  born <span class="org-type">integer</span>,
+  died <span class="org-type">integer</span>);
+<span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">books</span> (
+  id <span class="org-type">integer</span>,
+  title text,
+  author_id <span class="org-type">integer</span> <span class="org-keyword">references</span> authors(id),
+  <span class="org-keyword">year</span> <span class="org-type">integer</span>,
+  pages <span class="org-type">integer</span>,
+  <span class="org-keyword">style</span> text,
+  <span class="org-keyword">read</span> <span class="org-type">boolean</span>
+);
+</code></pre>
+</div>
+
+<div id="outline-container-orga4f874f" class="outline-4">
+<h4 id="orga4f874f">Join Tables</h4>
+<div class="outline-text-4" id="text-orga4f874f">
+<pre class="code"><code><span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">authors</span> (
+  id <span class="org-type">integer</span>,
+  fname text,
+  lname text,
+  born <span class="org-type">integer</span>,
+  died <span class="org-type">integer</span>);
+<span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">books</span> (
+  id <span class="org-type">integer</span>,
+  title text,
+  <span class="org-keyword">year</span> <span class="org-type">integer</span>,
+  pages <span class="org-type">integer</span>,
+  <span class="org-keyword">style</span> text,
+  <span class="org-keyword">read</span> <span class="org-type">boolean</span>
+);
+<span class="org-keyword">create</span> <span class="org-keyword">table</span> <span class="org-function-name">book_authors</span> (
+  book_id <span class="org-type">integer</span> <span class="org-keyword">references</span> books(id),
+  author_id <span class="org-type">integer</span> <span class="org-keyword">references</span> authors(id)
+);
+</code></pre>
+</div>
+</div>
+<div id="outline-container-orgc4dd557" class="outline-4">
+<h4 id="orgc4dd557">Views</h4>
+<div class="outline-text-4" id="text-orgc4dd557">
+<p>
+Typing that command to link together tables is going to be a pain.  We can &ldquo;save&rdquo; the selection as its own table.
+</p>
+
+
+<pre class="code"><code><span class="org-keyword">create</span> <span class="org-keyword">view</span> <span class="org-function-name">bookborn</span> <span class="org-keyword">as</span> <span class="org-keyword">select</span> books.title, authors.lname, authors.born
+    <span class="org-keyword">from</span> books, authors
+   <span class="org-keyword">where</span> books.author_id = authors.id;
+</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -512,7 +704,7 @@ More formally, it&rsquo;s called a Relational Database Management System or RDMS
  --></div>
 <div id="postamble" class="status">
 <p class="author">Author: Mattox Beckman</p>
-<p class="date">Created: 2022-03-21 Mon 11:11</p>
+<p class="date">Created: 2022-03-24 Thu 13:00</p>
 </div>
 </body>
 </html>
